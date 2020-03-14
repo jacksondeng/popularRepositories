@@ -1,12 +1,10 @@
 package com.jacksondeng.gojek.popularrepositories.data.repo
 
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
-import com.jacksondeng.gojek.popularrepositories.data.api.RELOAD_TIME
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
 import io.reactivex.Flowable
-import java.util.concurrent.TimeUnit
 
 interface FetchRepositoriesRepo {
     fun fetchRepositories(scheduler: BaseSchedulerProvider): Flowable<List<Repo>>

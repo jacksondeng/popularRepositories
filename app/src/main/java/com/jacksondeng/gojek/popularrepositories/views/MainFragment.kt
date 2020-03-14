@@ -101,6 +101,9 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.emptyLayout.viewModel = viewModel
+        binding.emptyLayout.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initViews() {

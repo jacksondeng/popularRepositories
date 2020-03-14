@@ -12,16 +12,21 @@ import com.jacksondeng.gojek.popularrepositories.util.State
 import com.jacksondeng.gojek.popularrepositories.views.adapter.InteractionListener
 import io.reactivex.disposables.CompositeDisposable
 
-class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : ViewModel(), InteractionListener {
-    private var _state = MutableLiveData<State>()
+class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : ViewModel(),
+    InteractionListener {
+    private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
 
     private var compositeDisposable = CompositeDisposable()
 
-    private var repositories = listOf<Repo>()
+    private var repositories = mutableListOf<Repo>()
 
     val isLoading = Transformations.map(state) {
         it is State.Loading
+    }
+
+    val showEmptyLayout = Transformations.map(state) {
+        it is State.Error && repositories.isEmpty()
     }
 
     fun fetchRepositories(schedulerProvider: BaseSchedulerProvider = SchedulerProvider()) {
@@ -31,7 +36,7 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
                 .subscribe({ repos ->
                     repos?.let {
                         if (it.isNotEmpty()) {
-                            repositories = it
+                            repositories.addAll(it)
                             _state.value = State.Loaded(it)
                         } else {
                             // TODO: localize strings
@@ -58,6 +63,7 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
 
     fun onRefresh() {
         compositeDisposable.clear()
+        repositories.clear()
         fetchRepositories()
     }
 }
