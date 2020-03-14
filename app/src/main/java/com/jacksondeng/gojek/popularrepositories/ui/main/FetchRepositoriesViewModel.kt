@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepo
+import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
 import com.jacksondeng.gojek.popularrepositories.util.SchedulerProvider
 import com.jacksondeng.gojek.popularrepositories.util.State
@@ -15,17 +16,25 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
 
     private var compositeDisposable = CompositeDisposable()
 
+    private var repositories = listOf<Repo>()
+
     fun fetchRepositories(schedulerProvider: BaseSchedulerProvider = SchedulerProvider()) {
         compositeDisposable.add(
             repo.fetchRepositories(schedulerProvider)
                 .subscribe({ repos ->
                     repos?.let {
-                        _state.value = State.Loaded(it)
+                        if (it.isNotEmpty()) {
+                            repositories = it
+                            _state.value = State.Loaded(it)
+                        } else {
+                            // TODO: localize strings
+                            _state.value = State.Error("Failed to load more repositories")
+                        }
                     } ?: run {
-                        _state.value = State.Error()
+                        _state.value = State.Error("Unknown error occurred")
                     }
                 }, {
-                    _state.value = State.Error()
+                    _state.value = State.Error("Unknown error occurred")
                 })
         )
     }
