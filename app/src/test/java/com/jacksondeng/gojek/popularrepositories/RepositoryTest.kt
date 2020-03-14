@@ -78,7 +78,7 @@ class RepositoryTest {
                         description = "MediaPipe is a cross-platform framework for building multimodal applied machine learning pipelines",
                         language = "C++",
                         languageColor = "#f34b7d",
-                        starts = 5641,
+                        stars = 5641,
                         forks = 977
                     )
                 )
