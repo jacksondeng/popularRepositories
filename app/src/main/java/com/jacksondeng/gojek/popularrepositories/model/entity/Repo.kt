@@ -8,8 +8,8 @@ data class Repo(
     val description: String,
     val language: String,
     val languageColor: String,
-    val stars: String,
-    val forks: String
+    val stars: Int,
+    val forks: Int
 ) {
     override fun equals(other: Any?): Boolean {
         if (other is Repo) {

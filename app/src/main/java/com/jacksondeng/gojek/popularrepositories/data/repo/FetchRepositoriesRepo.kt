@@ -43,8 +43,8 @@ class FetchRepositoriesRepoImpl(private val api: FetchRepositoriesApi) : FetchRe
             description = dto.description,
             language = dto.language ?: "",
             languageColor = dto.languageColor ?: "",
-            stars = dto.stars.toString(),
-            forks = dto.forks.toString()
+            stars = dto.stars,
+            forks = dto.forks
         )
     }
 }
