@@ -1,9 +1,9 @@
 package com.jacksondeng.gojek.popularrepositories.di.builder
 
+import com.jacksondeng.gojek.popularrepositories.di.scope.ActivityScope
 import com.jacksondeng.gojek.popularrepositories.views.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import javax.inject.Singleton
 
 @Module
 abstract class ActivityBuilder {
@@ -11,6 +11,6 @@ abstract class ActivityBuilder {
         modules = []
     )
 
-    @Singleton
-    abstract fun contributeMainActivity(): MainActivity
+    @ActivityScope
+    internal abstract fun contributeMainActivity(): MainActivity
 }

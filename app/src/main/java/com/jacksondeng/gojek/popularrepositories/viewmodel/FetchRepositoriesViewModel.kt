@@ -6,12 +6,16 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepo
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
-import com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem
-import com.jacksondeng.gojek.popularrepositories.util.*
+import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
+import com.jacksondeng.gojek.popularrepositories.util.EventType
+import com.jacksondeng.gojek.popularrepositories.util.SchedulerProvider
+import com.jacksondeng.gojek.popularrepositories.util.State
 import com.jacksondeng.gojek.popularrepositories.views.adapter.InteractionListener
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : ViewModel(),
+class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepositoriesRepo) :
+    ViewModel(),
     InteractionListener {
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
@@ -57,7 +61,7 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
     }
 
     override fun onItemClicked(expanded: Boolean, position: Int) {
-        if(expanded) {
+        if (expanded) {
             _state.value = State.Event(EventType.Collapse(position))
         } else {
             _state.value = State.Event(EventType.Expand(position))

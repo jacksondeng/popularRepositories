@@ -1,5 +1,6 @@
 package com.jacksondeng.gojek.popularrepositories.views
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,34 +8,31 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.jacksondeng.gojek.popularrepositories.R
-import com.jacksondeng.gojek.popularrepositories.data.api.BASE_URL
-import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApiImpl
-import com.jacksondeng.gojek.popularrepositories.data.api.TIMEOUT
-import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
 import com.jacksondeng.gojek.popularrepositories.databinding.MainFragmentBinding
 import com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem
 import com.jacksondeng.gojek.popularrepositories.util.EventType
 import com.jacksondeng.gojek.popularrepositories.util.State
+import com.jacksondeng.gojek.popularrepositories.util.ViewModelFactory
 import com.jacksondeng.gojek.popularrepositories.viewmodel.FetchRepositoriesViewModel
 import com.jacksondeng.gojek.popularrepositories.views.adapter.RepositoriesAdapter
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : DaggerFragment() {
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: FetchRepositoriesViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: FetchRepositoriesViewModel
     private lateinit var binding: MainFragmentBinding
     private lateinit var repoAdapter: RepositoriesAdapter
 
@@ -58,27 +56,7 @@ class MainFragment : Fragment() {
     }
 
     private fun initVm() {
-        // TODO: Inject with dagger
-        viewModel = FetchRepositoriesViewModel(
-            repo = FetchRepositoriesRepoImpl(
-                api = FetchRepositoriesApiImpl(
-                    retrofit = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .addConverterFactory(MoshiConverterFactory.create())
-                        .client(
-                            OkHttpClient
-                                .Builder()
-                                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-                                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
-                                .addInterceptor(HttpLoggingInterceptor())
-                                .build()
-                        )
-                        .build()
-                )
-            )
-        )
-
+        viewModel = ViewModelProvider(this, viewModelFactory)[FetchRepositoriesViewModel::class.java]
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.Loaded -> {
@@ -86,7 +64,6 @@ class MainFragment : Fragment() {
                         RepoItem(repo = it, expanded = false)
                     })
                 }
-
 
                 is State.Loading -> {
                     // TODO: Show loading state
