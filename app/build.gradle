@@ -27,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        // To prevent (RuntimeException: Method getMainLooper in android.os.Looper not mocked) during unit test
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -42,9 +47,12 @@ dependencies {
 
     // Tests
     testImplementation "junit:junit:${tests.junit}"
-    androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
+    testImplementation "android.arch.core:core-testing:${tests.archCore}"
     testImplementation "io.mockk:mockk:${tests.mockk}"
+
+    androidTestImplementation "androidx.test:runner:${tests.testRunner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
+    androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:${libraries.recyclerView}"
