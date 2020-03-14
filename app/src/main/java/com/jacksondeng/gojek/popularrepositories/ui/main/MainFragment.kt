@@ -1,12 +1,23 @@
 package com.jacksondeng.gojek.popularrepositories.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.jacksondeng.gojek.popularrepositories.R
+import com.jacksondeng.gojek.popularrepositories.data.api.BASE_URL
+import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApiImpl
+import com.jacksondeng.gojek.popularrepositories.data.api.TIMEOUT
+import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
+import com.jacksondeng.gojek.popularrepositories.util.State
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 class MainFragment : Fragment() {
 
@@ -14,7 +25,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: FetchRepositoriesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +36,55 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        initVm()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchRepositories()
+    }
+
+    private fun initVm() {
+        // TODO: Inject with dagger
+        viewModel = FetchRepositoriesViewModel(
+            repo = FetchRepositoriesRepoImpl(
+                api = FetchRepositoriesApiImpl(
+                    retrofit = Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .addConverterFactory(MoshiConverterFactory.create())
+                        .client(
+                            OkHttpClient
+                                .Builder()
+                                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                                .addInterceptor(HttpLoggingInterceptor())
+                                .build()
+                        )
+                        .build()
+                )
+            )
+        )
+
+        viewModel.state.observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is State.Loaded -> {
+                    // TODO: Display list
+                }
+
+
+                is State.Loading -> {
+                    // TODO: Show loading state
+                }
+
+                is State.RefreshList -> {
+                    // TODO: Refresh adapter
+                }
+
+                is State.Error -> {
+                    // TODO: Show error state
+                }
+            }
+        })
+    }
 }
