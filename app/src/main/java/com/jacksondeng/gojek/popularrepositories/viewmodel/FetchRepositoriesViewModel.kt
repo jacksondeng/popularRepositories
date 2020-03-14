@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.popularrepositories.viemodel
+package com.jacksondeng.gojek.popularrepositories.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -35,6 +35,7 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
                         _state.value = State.Error("Unknown error occurred")
                     }
                 }, {
+
                     _state.value = State.Error("Unknown error occurred")
                 })
         )

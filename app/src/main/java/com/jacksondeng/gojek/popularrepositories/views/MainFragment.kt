@@ -17,7 +17,7 @@ import com.jacksondeng.gojek.popularrepositories.data.api.TIMEOUT
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
 import com.jacksondeng.gojek.popularrepositories.databinding.MainFragmentBinding
 import com.jacksondeng.gojek.popularrepositories.util.State
-import com.jacksondeng.gojek.popularrepositories.viemodel.FetchRepositoriesViewModel
+import com.jacksondeng.gojek.popularrepositories.viewmodel.FetchRepositoriesViewModel
 import com.jacksondeng.gojek.popularrepositories.views.adapter.RepositoriesAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
