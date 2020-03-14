@@ -7,7 +7,7 @@ import com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem
 import com.jacksondeng.gojek.popularrepositories.util.leftDrawable
 import com.jacksondeng.gojek.popularrepositories.views.adapter.InteractionListener
 
-class RepoViewholder(
+class RepoItemViewholder(
     private val binding: ListRepositoryItemBinding,
     private val interactionListener: InteractionListener
 ) :
