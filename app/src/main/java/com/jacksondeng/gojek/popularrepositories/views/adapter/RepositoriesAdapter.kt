@@ -29,12 +29,16 @@ class RepositoriesAdapter(private val interactionListener: InteractionListener) 
         holder.bind(currentList[position])
 
     fun expand(position: Int) {
-        currentList[position].expanded = true
-        notifyItemChanged(position)
+        if (position in 0 until currentList.size) {
+            currentList[position].expanded = true
+            notifyItemChanged(position)
+        }
     }
 
     fun collapseItem(position: Int) {
-        currentList[position].expanded = false
-        notifyItemChanged(position)
+        if (position in 0 until currentList.size) {
+            currentList[position].expanded = false
+            notifyItemChanged(position)
+        }
     }
 }

@@ -1,12 +1,10 @@
 package com.jacksondeng.gojek.popularrepositories.views
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,7 +18,6 @@ import com.jacksondeng.gojek.popularrepositories.util.State
 import com.jacksondeng.gojek.popularrepositories.util.ViewModelFactory
 import com.jacksondeng.gojek.popularrepositories.viewmodel.FetchRepositoriesViewModel
 import com.jacksondeng.gojek.popularrepositories.views.adapter.RepositoriesAdapter
-import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -50,13 +47,12 @@ class MainFragment : DaggerFragment() {
         initViews()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchRepositories()
-    }
-
     private fun initVm() {
-        viewModel = ViewModelProvider(this, viewModelFactory)[FetchRepositoriesViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[FetchRepositoriesViewModel::class.java]
+
+        viewModel.fetchRepositories()
+
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.Loaded -> {
