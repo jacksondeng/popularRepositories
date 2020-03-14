@@ -32,6 +32,11 @@ android {
         // To prevent (RuntimeException: Method getMainLooper in android.os.Looper not mocked) during unit test
         unitTests.returnDefaultValues = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
