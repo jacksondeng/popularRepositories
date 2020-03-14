@@ -45,7 +45,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${configuration.kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${configuration.kotlinVersion}"
     implementation "androidx.appcompat:appcompat:${libraries.appcompat}"
     implementation "androidx.constraintlayout:constraintlayout:${libraries.constraintLayout}"
     implementation "com.google.android.material:material:${libraries.material}"
@@ -88,4 +88,13 @@ dependencies {
 
     // SwipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:${libraries.swipeRefreshLayout}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${libraries.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${libraries.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${libraries.dagger}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${libraries.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${libraries.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${libraries.dagger}"
+
 }

@@ -37,7 +37,8 @@ buildscript {
                 ktxVersion        : "1.2.0",
                 lifecycleExt      : "2.2.0",
                 glide             : "4.10.0",
-                swipeRefreshLayout: "1.0.0"
+                swipeRefreshLayout: "1.0.0",
+                dagger            : "2.17"
         ]
     }
 
