@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.jacksondeng.gojek.popularrepositories.R
 import com.jacksondeng.gojek.popularrepositories.data.api.BASE_URL
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApiImpl
@@ -44,6 +47,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initVm()
+        initViews()
     }
 
     override fun onResume() {
@@ -77,6 +81,7 @@ class MainFragment : Fragment() {
             when (state) {
                 is State.Loaded -> {
                     // TODO: Display list
+                    repoAdapter.submitList(state.repositories)
                 }
 
 
@@ -93,5 +98,15 @@ class MainFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun initViews() {
+        repoAdapter = RepositoriesAdapter(interactionListener = viewModel)
+        binding.repoList.apply {
+            adapter = repoAdapter
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            // Prevent imageview flickering when submitList is called
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+        }
     }
 }

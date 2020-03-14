@@ -8,9 +8,10 @@ import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
 import com.jacksondeng.gojek.popularrepositories.util.SchedulerProvider
 import com.jacksondeng.gojek.popularrepositories.util.State
+import com.jacksondeng.gojek.popularrepositories.views.adapter.InteractionListener
 import io.reactivex.disposables.CompositeDisposable
 
-class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : ViewModel() {
+class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : ViewModel(), InteractionListener {
     private var _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
 
@@ -42,5 +43,9 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+    }
+
+    override fun onItemClicked(repo: Repo) {
+        // TODO : Show drop down
     }
 }
