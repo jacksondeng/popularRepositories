@@ -98,6 +98,9 @@ class MainFragment : Fragment() {
                 }
             }
         })
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initViews() {

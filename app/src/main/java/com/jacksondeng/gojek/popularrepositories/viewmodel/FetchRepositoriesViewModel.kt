@@ -2,6 +2,7 @@ package com.jacksondeng.gojek.popularrepositories.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepo
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
@@ -19,7 +20,12 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
 
     private var repositories = listOf<Repo>()
 
+    val isLoading = Transformations.map(state) {
+        it is State.Loading
+    }
+
     fun fetchRepositories(schedulerProvider: BaseSchedulerProvider = SchedulerProvider()) {
+        _state.value = State.Loading()
         compositeDisposable.add(
             repo.fetchRepositories(schedulerProvider)
                 .subscribe({ repos ->
@@ -48,5 +54,10 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
 
     override fun onItemClicked(repo: Repo) {
         // TODO : Show drop down
+    }
+
+    fun onRefresh() {
+        compositeDisposable.clear()
+        fetchRepositories()
     }
 }
