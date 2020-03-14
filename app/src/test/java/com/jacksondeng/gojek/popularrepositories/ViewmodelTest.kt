@@ -4,7 +4,7 @@ import android.accounts.NetworkErrorException
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepo
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
-import com.jacksondeng.gojek.popularrepositories.ui.main.FetchRepositoriesViewModel
+import com.jacksondeng.gojek.popularrepositories.viemodel.FetchRepositoriesViewModel
 import com.jacksondeng.gojek.popularrepositories.util.State
 import com.jacksondeng.gojek.popularrepositories.util.TrampolineSchedulerProvider
 import io.mockk.MockKAnnotations

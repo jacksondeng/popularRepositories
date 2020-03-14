@@ -1,8 +1,8 @@
-package com.jacksondeng.gojek.popularrepositories
+package com.jacksondeng.gojek.popularrepositories.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.jacksondeng.gojek.popularrepositories.ui.main.MainFragment
+import com.jacksondeng.gojek.popularrepositories.R
 
 class MainActivity : AppCompatActivity() {
 

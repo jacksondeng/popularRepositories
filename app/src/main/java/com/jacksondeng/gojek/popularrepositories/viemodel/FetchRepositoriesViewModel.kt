@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.popularrepositories.ui.main
+package com.jacksondeng.gojek.popularrepositories.viemodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
