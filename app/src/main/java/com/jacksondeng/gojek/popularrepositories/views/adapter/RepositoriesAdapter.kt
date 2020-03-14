@@ -19,7 +19,7 @@ class RepositoriesAdapter(private val interactionListener: InteractionListener) 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewholder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ListItemRepositoryBinding = DataBindingUtil.inflate(
-            layoutInflater, R.layout.list_item_repository, parent, false
+            layoutInflater, R.layout.list_repository_item, parent, false
         )
         return RepoViewholder(binding,interactionListener)
     }
