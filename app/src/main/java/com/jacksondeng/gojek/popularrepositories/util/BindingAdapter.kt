@@ -3,12 +3,14 @@ package com.jacksondeng.gojek.popularrepositories.util
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import java.text.NumberFormat
 
 @BindingAdapter("bind:imageUrl")
 fun loadImage(view: ImageView, imageUrl: String) {
@@ -27,4 +29,9 @@ fun loadImage(view: ImageView, imageUrl: String) {
             }
 
         })
+}
+
+@BindingAdapter("bind:convertCounts")
+fun convertCounts(view: TextView, count:Int) {
+    view.text = NumberFormat.getIntegerInstance().format(count)
 }
