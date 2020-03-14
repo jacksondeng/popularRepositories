@@ -44,6 +44,7 @@ dependencies {
     testImplementation "junit:junit:${tests.junit}"
     androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
+    testImplementation "io.mockk:mockk:${tests.mockk}"
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:${libraries.recyclerView}"
