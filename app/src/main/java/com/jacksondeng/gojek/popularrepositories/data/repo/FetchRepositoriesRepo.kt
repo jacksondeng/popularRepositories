@@ -1,6 +1,7 @@
 package com.jacksondeng.gojek.popularrepositories.data.repo
 
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
+import com.jacksondeng.gojek.popularrepositories.data.api.RELOAD_TIME
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
@@ -23,7 +24,7 @@ class FetchRepositoriesRepoImpl(private val api: FetchRepositoriesApi) : FetchRe
                 // TODO: Fall back to cached result
             )*/
 
-        ).repeatWhen { flow: Flowable<Any> -> flow.delay(1, TimeUnit.SECONDS) }
+        ).repeatWhen { flow: Flowable<Any> -> flow.delay(RELOAD_TIME, TimeUnit.SECONDS) }
             .onBackpressureLatest()
             .subscribeOn(scheduler.io())
             .observeOn(scheduler.ui())
