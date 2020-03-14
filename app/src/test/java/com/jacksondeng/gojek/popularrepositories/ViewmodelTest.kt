@@ -66,6 +66,14 @@ class ViewmodelTest {
             NetworkErrorException()
         )
         viewModel.fetchRepositories(schedulerProvider)
-        Assert.assertTrue(viewModel.state.getOrAwaitValue() == State.Error())
+        Assert.assertTrue(viewModel.state.getOrAwaitValue() is State.Error)
+    }
+
+    @Test
+    internal fun `fetch repos success but returns empty list test`() {
+        val schedulerProvider = TrampolineSchedulerProvider()
+        every { repo.fetchRepositories(schedulerProvider) } returns Flowable.just(emptyList())
+        viewModel.fetchRepositories(schedulerProvider)
+        Assert.assertTrue(viewModel.state.getOrAwaitValue() is State.Error)
     }
 }
