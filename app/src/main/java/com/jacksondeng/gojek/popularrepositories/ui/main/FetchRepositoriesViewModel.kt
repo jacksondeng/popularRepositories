@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepo
+import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
+import com.jacksondeng.gojek.popularrepositories.util.SchedulerProvider
 import com.jacksondeng.gojek.popularrepositories.util.State
 import io.reactivex.disposables.CompositeDisposable
 
@@ -13,9 +15,9 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
 
     private var compositeDisposable = CompositeDisposable()
 
-    fun fetchRepositories() {
+    fun fetchRepositories(schedulerProvider: BaseSchedulerProvider = SchedulerProvider()) {
         compositeDisposable.add(
-            repo.fetchRepositories()
+            repo.fetchRepositories(schedulerProvider)
                 .subscribe({ repos ->
                     repos?.let {
                         _state.value = State.Loaded(it)
