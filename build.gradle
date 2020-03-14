@@ -35,8 +35,8 @@ buildscript {
                 appCompat       : "1.2.0-alpha01",
                 material        : "1.2.0-alpha05",
                 ktxVersion      : "1.2.0",
-                lifecycleExt    : "2.2.0"
-
+                lifecycleExt    : "2.2.0",
+                glide           : "4.10.0",
         ]
     }
 
