@@ -16,6 +16,8 @@ import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApiIm
 import com.jacksondeng.gojek.popularrepositories.data.api.TIMEOUT
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
 import com.jacksondeng.gojek.popularrepositories.databinding.MainFragmentBinding
+import com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem
+import com.jacksondeng.gojek.popularrepositories.util.EventType
 import com.jacksondeng.gojek.popularrepositories.util.State
 import com.jacksondeng.gojek.popularrepositories.viewmodel.FetchRepositoriesViewModel
 import com.jacksondeng.gojek.popularrepositories.views.adapter.RepositoriesAdapter
@@ -80,8 +82,9 @@ class MainFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.Loaded -> {
-                    // TODO: Display list
-                    repoAdapter.submitList(state.repositories)
+                    repoAdapter.submitList(state.repositories.map {
+                        RepoItem(repo = it, expanded = false)
+                    })
                 }
 
 
@@ -89,12 +92,12 @@ class MainFragment : Fragment() {
                     // TODO: Show loading state
                 }
 
-                is State.RefreshList -> {
-                    // TODO: Refresh adapter
-                }
-
                 is State.Error -> {
                     // TODO: Show error state
+                }
+
+                is State.Event -> {
+                    handleEvent(state.type)
                 }
             }
         })
@@ -113,6 +116,18 @@ class MainFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             // Prevent imageview flickering when submitList is called
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+        }
+    }
+
+    private fun handleEvent(eventType: EventType) {
+        when (eventType) {
+            is EventType.Expand -> {
+                repoAdapter.expand(eventType.position)
+            }
+
+            is EventType.Collapse -> {
+                repoAdapter.collapseItem(eventType.position)
+            }
         }
     }
 }

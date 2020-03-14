@@ -12,7 +12,7 @@ data class RepoDTO(
     val description: String,
     val language: String?,
     val languageColor: String?,
-    val starts: Int,
+    val stars: Int,
     val forks: Int,
     val currentPeriodStars: Int,
     @field:Json(name = "builtBy")

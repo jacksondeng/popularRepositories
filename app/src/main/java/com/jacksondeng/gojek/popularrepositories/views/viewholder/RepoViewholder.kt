@@ -2,19 +2,19 @@ package com.jacksondeng.gojek.popularrepositories.views.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.jacksondeng.gojek.popularrepositories.databinding.ListRepositoryItemBinding
-import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
+import com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem
 import com.jacksondeng.gojek.popularrepositories.views.adapter.InteractionListener
 
 class RepoViewholder(
     private val binding: ListRepositoryItemBinding,
-    val interactionListener: InteractionListener
+    private val interactionListener: InteractionListener
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(repo: Repo) {
-        binding.obj = repo
+    fun bind(item: RepoItem) {
+        binding.obj = item
         binding.root.setOnClickListener {
-            interactionListener.onItemClicked(repo)
+            interactionListener.onItemClicked(item.expanded, adapterPosition)
         }
         binding.executePendingBindings()
     }

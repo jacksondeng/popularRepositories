@@ -6,9 +6,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepo
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
-import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
-import com.jacksondeng.gojek.popularrepositories.util.SchedulerProvider
-import com.jacksondeng.gojek.popularrepositories.util.State
+import com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem
+import com.jacksondeng.gojek.popularrepositories.util.*
 import com.jacksondeng.gojek.popularrepositories.views.adapter.InteractionListener
 import io.reactivex.disposables.CompositeDisposable
 
@@ -57,8 +56,12 @@ class FetchRepositoriesViewModel(private val repo: FetchRepositoriesRepo) : View
         compositeDisposable.dispose()
     }
 
-    override fun onItemClicked(repo: Repo) {
-        // TODO : Show drop down
+    override fun onItemClicked(expanded: Boolean, position: Int) {
+        if(expanded) {
+            _state.value = State.Event(EventType.Collapse(position))
+        } else {
+            _state.value = State.Event(EventType.Expand(position))
+        }
     }
 
     fun onRefresh() {
