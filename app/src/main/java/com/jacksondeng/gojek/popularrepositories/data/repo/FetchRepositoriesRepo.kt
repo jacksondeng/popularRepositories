@@ -24,7 +24,8 @@ class FetchRepositoriesRepoImpl(private val api: FetchRepositoriesApi) : FetchRe
                 // TODO: Fall back to cached result
             )*/
 
-        ).repeatWhen { flow: Flowable<Any> -> flow.delay(RELOAD_TIME, TimeUnit.SECONDS) }
+        )
+            //.repeatWhen { flow: Flowable<Any> -> flow.delay(RELOAD_TIME, TimeUnit.SECONDS) }
             .onBackpressureLatest()
             .subscribeOn(scheduler.io())
             .observeOn(scheduler.ui())
