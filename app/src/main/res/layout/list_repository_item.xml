@@ -11,6 +11,8 @@
             type="com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem" />
 
         <import type="android.view.View"/>
+
+        <import type="com.jacksondeng.gojek.popularrepositories.R"/>
     </data>
 
 
@@ -79,7 +81,6 @@
                     android:drawablePadding="8dp"
                     android:textSize="14sp"
                     android:id="@+id/langaugeTv"
-                    android:drawableStart="@drawable/ic_circle"
                     android:visibility="@{obj.repo.language.empty ? View.GONE : View.VISIBLE}"
                     tools:text="C++"/>
 
@@ -93,7 +94,6 @@
                     bind:convertCounts="@{obj.repo.stars}"
                     android:drawablePadding="8dp"
                     android:textSize="14sp"
-                    android:drawableStart="@drawable/star_yellow_16"
                     android:visibility="@{obj.repo.language.empty ? View.GONE : View.VISIBLE}"
                     tools:text="14,133"/>
 
@@ -107,7 +107,6 @@
                     bind:convertCounts="@{obj.repo.forks}"
                     android:drawablePadding="8dp"
                     android:textSize="14sp"
-                    android:drawableStart="@drawable/fork_black_16"
                     android:visibility="@{obj.repo.language.empty ? View.GONE : View.VISIBLE}"
                     tools:text="14,133"/>
 
