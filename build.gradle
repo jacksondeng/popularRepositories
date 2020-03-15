@@ -39,7 +39,8 @@ buildscript {
                 glide             : "4.10.0",
                 swipeRefreshLayout: "1.0.0",
                 dagger            : "2.17",
-                room              : "2.2.4"
+                room              : "2.2.4",
+                joda            : "2.10.5",
         ]
     }
 
