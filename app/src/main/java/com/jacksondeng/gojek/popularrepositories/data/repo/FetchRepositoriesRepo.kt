@@ -41,7 +41,8 @@ class FetchRepositoriesRepoImpl @Inject constructor(
                         Flowable.just(emptyList())
                 )
                 .doOnNext {
-                    cacheRepos(it)
+                    if(it.isNotEmpty())
+                        cacheRepos(it)
                 }
         )
             .onBackpressureLatest()
