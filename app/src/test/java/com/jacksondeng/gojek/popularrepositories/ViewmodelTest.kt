@@ -70,7 +70,7 @@ class ViewmodelTest {
     }
 
     @Test
-    internal fun `fetch repos success but returns empty list test`() {
+    internal fun `fetch repos returns empty list test`() {
         val schedulerProvider = TrampolineSchedulerProvider()
         every { repo.fetchRepositories(schedulerProvider) } returns Flowable.just(emptyList())
         viewModel.fetchRepositories(schedulerProvider)

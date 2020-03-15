@@ -49,7 +49,6 @@ class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepo
                         _state.value = State.Error("Unknown error occurred")
                     }
                 }, {
-
                     _state.value = State.Error("Unknown error occurred")
                 })
         )
