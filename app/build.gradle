@@ -97,4 +97,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${libraries.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${libraries.dagger}"
 
+
+    // Room
+    implementation "androidx.room:room-runtime:${libraries.room}"
+    kapt "androidx.room:room-compiler:${libraries.room}"
+    implementation "androidx.room:room-rxjava2:${libraries.room}"
 }
