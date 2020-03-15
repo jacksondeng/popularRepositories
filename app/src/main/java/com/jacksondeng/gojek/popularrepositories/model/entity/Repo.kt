@@ -1,6 +1,12 @@
 package com.jacksondeng.gojek.popularrepositories.model.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.jacksondeng.gojek.popularrepositories.data.cache.db.TABLE_NAME_REPOS
+
+@Entity(tableName = TABLE_NAME_REPOS)
 data class Repo(
+    @PrimaryKey(autoGenerate = true)
     val author: String,
     val name: String,
     val avatarUrl: String,
