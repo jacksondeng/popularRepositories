@@ -103,4 +103,7 @@ dependencies {
 
     // Multidex
     implementation "androidx.multidex:multidex:${configuration.multidex}"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services:${libraries.googlePlay}"
 }
