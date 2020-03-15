@@ -1,7 +1,9 @@
 package com.jacksondeng.gojek.popularrepositories
 
 import android.accounts.NetworkErrorException
+import android.content.SharedPreferences
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
+import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
 import com.jacksondeng.gojek.popularrepositories.model.dto.BuilderDTO
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
@@ -44,11 +46,15 @@ class RepositoryTest {
 
     private val api = mockk<FetchRepositoriesApi>()
 
+    private val repoDao = mockk<RepoDao>(relaxed = true)
+
+    private val sharePref = mockk<SharedPreferences>(relaxed = true)
+
     lateinit var repo: FetchRepositoriesRepoImpl
 
     @Before
     internal fun setUp() {
-        repo = FetchRepositoriesRepoImpl(api)
+        repo = FetchRepositoriesRepoImpl(api, repoDao, sharePref)
         RxJavaPlugins.reset()
         RxAndroidPlugins.setInitMainThreadSchedulerHandler {
             Schedulers.trampoline()
@@ -91,7 +97,7 @@ class RepositoryTest {
     internal fun `fetch repo failed no internet test`() {
         every { api.fetchRepositories() } returns Flowable.error(NetworkErrorException())
 
-        val subscriber = repo.fetchRepositories( TrampolineSchedulerProvider())
+        val subscriber = repo.fetchRepositories(TrampolineSchedulerProvider())
             .test()
             .assertError {
                 println(it)
