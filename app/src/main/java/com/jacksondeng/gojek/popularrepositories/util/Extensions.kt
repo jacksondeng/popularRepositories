@@ -50,3 +50,14 @@ fun Context.registerNetworkCallback(onAvailableAction: () -> Unit, onLostAction:
         }
     )
 }
+
+
+@Suppress("DEPRECATION")
+fun Context.isOnline(): Boolean {
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+    return if (connectivityManager != null && connectivityManager.activeNetworkInfo != null)
+        connectivityManager.activeNetworkInfo!!.isConnected
+    else
+        false
+}

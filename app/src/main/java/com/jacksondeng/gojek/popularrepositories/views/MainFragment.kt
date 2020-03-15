@@ -46,6 +46,11 @@ class MainFragment : DaggerFragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        preLollipop {
+            isConnectedToNetwork = context?.isOnline() ?: true
+        }
+
         postLollipop {
             context?.registerNetworkCallback(onAvailableAction = {
                 isConnectedToNetwork = true
@@ -105,7 +110,11 @@ class MainFragment : DaggerFragment() {
             if (isConnectedToNetwork) {
                 viewModel.onRefresh()
             } else {
-                Toast.makeText(context, context?.getString(R.string.no_internet_connection_msg), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    context?.getString(R.string.no_internet_connection_msg),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
