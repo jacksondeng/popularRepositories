@@ -1,9 +1,6 @@
 package com.jacksondeng.gojek.popularrepositories.data.cache.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.jacksondeng.gojek.popularrepositories.data.cache.db.TABLE_NAME_REPOS
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import io.reactivex.Single
@@ -15,4 +12,7 @@ interface RepoDao {
 
     @Query("SELECT * FROM $TABLE_NAME_REPOS")
     fun getCachedRepos(): Single<List<Repo>>
+
+    @Query("DELETE FROM $TABLE_NAME_REPOS")
+    fun clearCache()
 }
