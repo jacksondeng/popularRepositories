@@ -1,5 +1,6 @@
 package com.jacksondeng.gojek.popularrepositories.di.module
 
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.jacksondeng.gojek.popularrepositories.PopularRepositoriesApplication
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
@@ -31,8 +32,9 @@ class RepositoryModule {
     @FragmentScope
     fun providesRepositoriesRepo(
         api: FetchRepositoriesApi,
-        dao: RepoDao
+        dao: RepoDao,
+        sharePref: SharedPreferences
     ): FetchRepositoriesRepo {
-        return FetchRepositoriesRepoImpl(api, dao)
+        return FetchRepositoriesRepoImpl(api, dao, sharePref)
     }
 }

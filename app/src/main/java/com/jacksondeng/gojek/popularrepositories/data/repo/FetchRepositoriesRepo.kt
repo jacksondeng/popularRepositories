@@ -1,5 +1,6 @@
 package com.jacksondeng.gojek.popularrepositories.data.repo
 
+import android.content.SharedPreferences
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
 import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
@@ -14,7 +15,8 @@ interface FetchRepositoriesRepo {
 
 class FetchRepositoriesRepoImpl @Inject constructor(
     private val api: FetchRepositoriesApi,
-    private val reposDao: RepoDao
+    private val reposDao: RepoDao,
+    private val sharePref: SharedPreferences
 ) :
 
     FetchRepositoriesRepo {
