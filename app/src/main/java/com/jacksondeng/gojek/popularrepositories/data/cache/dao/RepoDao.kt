@@ -11,7 +11,7 @@ import io.reactivex.Single
 @Dao
 interface RepoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun updateCache(repos: List<Repo>): Long
+    fun updateCache(repos: List<Repo>)
 
     @Query("SELECT * FROM $TABLE_NAME_REPOS")
     fun getCachedRepos(): Single<List<Repo>>

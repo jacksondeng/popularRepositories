@@ -1,28 +1,33 @@
 package com.jacksondeng.gojek.popularrepositories.data.repo
 
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
+import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
 import io.reactivex.Flowable
+import javax.inject.Inject
 
 interface FetchRepositoriesRepo {
     fun fetchRepositories(scheduler: BaseSchedulerProvider): Flowable<List<Repo>>
 }
 
-class FetchRepositoriesRepoImpl(private val api: FetchRepositoriesApi) : FetchRepositoriesRepo {
+class FetchRepositoriesRepoImpl @Inject constructor(
+    private val api: FetchRepositoriesApi,
+    private val reposDao: RepoDao
+) :
+
+    FetchRepositoriesRepo {
     override fun fetchRepositories(scheduler: BaseSchedulerProvider): Flowable<List<Repo>> {
 
         return Flowable.fromPublisher(
             api.fetchRepositories().retry(2)
                 .doOnNext {
-                    // TODO: Caching
+                    reposDao.updateCache(it.map { dto ->
+                        mapToModel(dto)
+                    })
                 }
-            /*.onErrorResumeNext(
-                // TODO: Fall back to cached result
-            )*/
-
-        )
+            )
             //.repeatWhen { flow: Flowable<Any> -> flow.delay(RELOAD_TIME, TimeUnit.SECONDS) }
             .onBackpressureLatest()
             .subscribeOn(scheduler.io())
