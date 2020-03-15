@@ -75,7 +75,7 @@ class RepositoryTest {
             dummyResponse
         )
 
-        val subscriber = repo.fetchRepositories(TrampolineSchedulerProvider())
+        val observer = repo.fetchRepositories(TrampolineSchedulerProvider())
             .test()
             .assertValue(
                 listOf(
@@ -93,7 +93,7 @@ class RepositoryTest {
                 )
             )
 
-        subscriber.dispose()
+        observer.dispose()
     }
 
     @Test
@@ -133,14 +133,14 @@ class RepositoryTest {
             mockResponse
         )
 
-        val subscriber = repo.fetchRepositories(TrampolineSchedulerProvider())
+        val observer = repo.fetchRepositories(TrampolineSchedulerProvider())
             .test()
             .assertValue {
                 it.isNotEmpty()
             }
             .assertTerminated()
 
-        subscriber.dispose()
+        observer.dispose()
     }
 
     @Test
@@ -151,13 +151,13 @@ class RepositoryTest {
 
         every { repoDao.getCachedRepos() } returns Single.just(emptyList())
 
-        val subscriber = repo.fetchRepositories(TrampolineSchedulerProvider())
+        val observer = repo.fetchRepositories(TrampolineSchedulerProvider())
             .test()
             .assertValue {
                 it.isEmpty()
             }
             .assertTerminated()
 
-        subscriber.dispose()
+        observer.dispose()
     }
 }
