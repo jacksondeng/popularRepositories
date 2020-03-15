@@ -1,6 +1,7 @@
 package com.jacksondeng.gojek.popularrepositories.data.repo
 
 import android.content.SharedPreferences
+import androidx.annotation.VisibleForTesting
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
 import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
 import com.jacksondeng.gojek.popularrepositories.di.module.TAG_LAST_CACHED_TIME
@@ -26,24 +27,30 @@ class FetchRepositoriesRepoImpl @Inject constructor(
 
         return Flowable.fromPublisher(
             api.fetchRepositories().retry(2)
-                .doOnNext {
-                    cacheRepos(it.map { dto ->
+                .flatMap {
+                    Flowable.just(it.map { dto ->
                         mapToModel(dto)
                     })
                 }
-            )
-            //.repeatWhen { flow: Flowable<Any> -> flow.delay(RELOAD_TIME, TimeUnit.SECONDS) }
+                // Fallback to cache if error occurred     
+                .onErrorResumeNext(
+                    // Check sharePref to prevent unnecessary db operations
+                    if (sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) == -1L)
+                        reposDao.getCachedRepos().toFlowable()
+                    else
+                        Flowable.just(emptyList())
+                )
+                .doOnNext {
+                    cacheRepos(it)
+                }
+        )
             .onBackpressureLatest()
             .subscribeOn(scheduler.io())
             .observeOn(scheduler.ui())
-            .flatMap {
-                Flowable.just(it.map { dto ->
-                    mapToModel(dto)
-                })
-            }
     }
 
-    private fun mapToModel(dto: RepoDTO): Repo {
+    @VisibleForTesting
+    fun mapToModel(dto: RepoDTO): Repo {
         return Repo(
             author = dto.author,
             name = dto.name,
