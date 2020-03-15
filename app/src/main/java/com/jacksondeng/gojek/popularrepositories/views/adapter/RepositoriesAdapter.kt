@@ -17,6 +17,9 @@ class RepositoriesAdapter(private val interactionListener: InteractionListener) 
     androidx.recyclerview.widget.ListAdapter<RepoItem, RepoItemViewholder>(
         RepoItemiffCallback()
     ) {
+
+    private var expandedPosition: Int = -1
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoItemViewholder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ListRepositoryItemBinding = DataBindingUtil.inflate(
@@ -26,12 +29,12 @@ class RepositoriesAdapter(private val interactionListener: InteractionListener) 
     }
 
     override fun onBindViewHolder(holder: RepoItemViewholder, position: Int) =
-        holder.bind(currentList[position])
+        holder.bind(currentList[position].apply { expanded = (position == expandedPosition) })
 
     fun expand(position: Int) {
         if (position in 0 until currentList.size) {
-            currentList[position].expanded = true
-            notifyItemChanged(position)
+            expandedPosition = position
+            notifyDataSetChanged()
         }
     }
 
