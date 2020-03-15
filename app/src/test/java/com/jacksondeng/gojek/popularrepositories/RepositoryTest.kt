@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
 import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
 import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
+import com.jacksondeng.gojek.popularrepositories.di.module.TAG_LAST_CACHED_TIME
 import com.jacksondeng.gojek.popularrepositories.model.dto.BuilderDTO
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
@@ -12,10 +13,12 @@ import com.jacksondeng.gojek.popularrepositories.util.TrampolineSchedulerProvide
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -94,16 +97,65 @@ class RepositoryTest {
     }
 
     @Test
-    internal fun `fetch repo failed no internet test`() {
+    internal fun `mapToModel test`() {
+        val expectedRepo = listOf(
+            Repo(
+                author = "google",
+                name = "mediapipe",
+                avatarUrl = "https://github.com/google.png",
+                repoUrl = "https://github.com/google/mediapipe",
+                description = "MediaPipe is a cross-platform framework for building multimodal applied machine learning pipelines",
+                language = "C++",
+                languageColor = "#f34b7d",
+                stars = 5641,
+                forks = 977
+            )
+        )
+
+        val mappedRepo = dummyResponse.map {
+            repo.mapToModel(it)
+        }
+
+        Assert.assertTrue(expectedRepo == mappedRepo)
+    }
+
+    @Test
+    internal fun `api failed, fallback to cache value test`() {
         every { api.fetchRepositories() } returns Flowable.error(NetworkErrorException())
+
+        every { sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) } returns 1234L
+
+        val mockResponse = dummyResponse.map {
+            repo.mapToModel(it)
+        }
+
+        every { repoDao.getCachedRepos() } returns Single.just(
+            mockResponse
+        )
 
         val subscriber = repo.fetchRepositories(TrampolineSchedulerProvider())
             .test()
-            .assertError {
-                println(it)
-                it is NetworkErrorException
+            .assertValue {
+                it.isNotEmpty()
             }
-            .assertNoValues()
+            .assertTerminated()
+
+        subscriber.dispose()
+    }
+
+    @Test
+    internal fun `api failed, cache is empty test`() {
+        every { api.fetchRepositories() } returns Flowable.error(NetworkErrorException())
+
+        every { sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) } returns -1L
+
+        every { repoDao.getCachedRepos() } returns Single.just(emptyList())
+
+        val subscriber = repo.fetchRepositories(TrampolineSchedulerProvider())
+            .test()
+            .assertValue {
+                it.isEmpty()
+            }
             .assertTerminated()
 
         subscriber.dispose()
