@@ -40,7 +40,7 @@ class RepositoriesAdapter(private val interactionListener: InteractionListener) 
 
     fun collapseItem(position: Int) {
         if (position in 0 until currentList.size) {
-            currentList[position].expanded = false
+            expandedPosition = -1
             notifyItemChanged(position)
         }
     }
