@@ -23,6 +23,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
 ) :
 
     FetchRepositoriesRepo {
+
     override fun fetchRepositories(scheduler: BaseSchedulerProvider): Flowable<List<Repo>> {
 
         return Flowable.fromPublisher(
@@ -32,7 +33,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
                         mapToModel(dto)
                     })
                 }
-                // Fallback to cache if error occurred     
+                // Fallback to cache if error occurred
                 .onErrorResumeNext(
                     // Check sharePref to prevent unnecessary db operations
                     if (sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) != -1L)
@@ -41,7 +42,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
                         Flowable.just(emptyList())
                 )
                 .doOnNext {
-                    if(it.isNotEmpty())
+                    if (it.isNotEmpty())
                         cacheRepos(it)
                 }
         )
