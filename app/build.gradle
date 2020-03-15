@@ -62,9 +62,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
     androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
 
-    // RecyclerView
-    implementation "androidx.recyclerview:recyclerview:${libraries.recyclerView}"
-
     // ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:${libraries.constraintLayout}"
 
@@ -105,5 +102,5 @@ dependencies {
     implementation "joda-time:joda-time:${libraries.joda}"
 
     // Multidex
-    implementation "com.android.support:multidex:${configuration.multiDex}"
+    implementation "androidx.multidex:multidex:${configuration.multidex}"
 }
