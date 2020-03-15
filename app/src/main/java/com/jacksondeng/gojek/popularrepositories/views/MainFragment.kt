@@ -48,6 +48,14 @@ class MainFragment : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         preLollipop {
+            context?.installTls12IfNeeded {
+                Toast.makeText(
+                    context,
+                    context?.getString(R.string.no_internet_connection_msg),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             isConnectedToNetwork = context?.isOnline() ?: true
         }
 

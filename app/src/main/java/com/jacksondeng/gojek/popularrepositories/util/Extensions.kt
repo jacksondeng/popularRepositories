@@ -10,6 +10,10 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.security.ProviderInstaller
 
 
 fun TextView.leftDrawable(@DrawableRes id: Int = 0, @DimenRes sizeRes: Int) {
@@ -60,4 +64,15 @@ fun Context.isOnline(): Boolean {
         connectivityManager.activeNetworkInfo!!.isConnected
     else
         false
+}
+
+fun Context.installTls12IfNeeded(onErrorAction: () -> Unit) {
+    try {
+        ProviderInstaller.installIfNeeded(this)
+    } catch (e: GooglePlayServicesRepairableException) {
+        // Prompt the user to install/update/enable Google Play services.
+        GoogleApiAvailability.getInstance().showErrorNotification(this, e.connectionStatusCode)
+    } catch (e: GooglePlayServicesNotAvailableException) {
+        onErrorAction.invoke()
+    }
 }
