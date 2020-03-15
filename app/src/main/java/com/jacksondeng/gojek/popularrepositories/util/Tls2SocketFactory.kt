@@ -54,7 +54,7 @@ class Tls12SocketFactory(private val delegate: SSLSocketFactory) : SSLSocketFact
         fun OkHttpClient.Builder.enableTls12() = apply {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
                 try {
-                    val sslContext = SSLContext.getInstance(TlsVersion.TLS_1_2.javaName)
+                    val sslContext = SSLContext.getInstance(TlsVersion.TLS_1_2.javaName())
                     sslContext.init(null, arrayOf(trustManager), null)
 
                     sslSocketFactory(Tls12SocketFactory(sslContext.socketFactory), trustManager)
@@ -73,7 +73,7 @@ class Tls12SocketFactory(private val delegate: SSLSocketFactory) : SSLSocketFact
      */
     private fun Socket.patchForTls12(): Socket {
         return (this as? SSLSocket)?.apply {
-            enabledProtocols += TlsVersion.TLS_1_2.javaName
+            enabledProtocols += TlsVersion.TLS_1_2.javaName()
         } ?: this
     }
 
