@@ -35,7 +35,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
                 // Fallback to cache if error occurred     
                 .onErrorResumeNext(
                     // Check sharePref to prevent unnecessary db operations
-                    if (sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) == -1L)
+                    if (sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) != -1L)
                         reposDao.getCachedRepos().toFlowable()
                     else
                         Flowable.just(emptyList())
