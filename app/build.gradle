@@ -20,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -105,4 +106,7 @@ dependencies {
 
     // Joda
     implementation "joda-time:joda-time:${libraries.joda}"
+
+    // Multidex
+    implementation "com.android.support:multidex:${configuration.multiDex}"
 }
