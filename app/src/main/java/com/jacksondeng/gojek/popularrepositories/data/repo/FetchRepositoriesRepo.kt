@@ -3,10 +3,12 @@ package com.jacksondeng.gojek.popularrepositories.data.repo
 import android.content.SharedPreferences
 import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
 import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
+import com.jacksondeng.gojek.popularrepositories.di.module.TAG_LAST_CACHED_TIME
 import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
 import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
 import com.jacksondeng.gojek.popularrepositories.util.BaseSchedulerProvider
 import io.reactivex.Flowable
+import org.joda.time.Interval
 import javax.inject.Inject
 
 interface FetchRepositoriesRepo {
@@ -25,7 +27,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
         return Flowable.fromPublisher(
             api.fetchRepositories().retry(2)
                 .doOnNext {
-                    reposDao.updateCache(it.map { dto ->
+                    cacheRepos(it.map { dto ->
                         mapToModel(dto)
                     })
                 }
@@ -53,5 +55,29 @@ class FetchRepositoriesRepoImpl @Inject constructor(
             stars = dto.stars,
             forks = dto.forks
         )
+    }
+
+    private fun cacheRepos(repos: List<Repo>) {
+        val lastCachedTime = sharePref.getLong(TAG_LAST_CACHED_TIME, -1L)
+        if (lastCachedTime == -1L) {
+            // If lastCachedTime == -1 -> there were no cached data -> updateCache
+            updateCache(repos)
+        } else {
+            val interval = Interval(lastCachedTime, System.currentTimeMillis())
+            // If lastCachedTime == 2hours -> clear and update Cache
+            if (interval.toDuration().standardHours >= 2) {
+                clearCache()
+                updateCache(repos)
+            }
+        }
+    }
+
+    private fun clearCache() = reposDao.clearCache()
+
+    private fun updateCache(repos: List<Repo>) {
+        reposDao.updateCache(repos)
+        sharePref.edit()
+            .putLong(TAG_LAST_CACHED_TIME, System.currentTimeMillis())
+            .apply()
     }
 }

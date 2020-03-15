@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 const val PREF_FILE_NAME = "repos.pref"
+const val TAG_LAST_CACHED_TIME = "lastCachedTime"
 
 @Module
 class SharePrefModule {
