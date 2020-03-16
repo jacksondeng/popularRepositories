@@ -1,5 +1,7 @@
 package com.jacksondeng.gojek.popularrepositories.views
 
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,6 +37,21 @@ class MainFragment : DaggerFragment() {
     private lateinit var repoAdapter: RepositoriesAdapter
     private var isConnectedToNetwork = false
 
+    private val networkCallback by lazy {
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+                isConnectedToNetwork = true
+            }
+
+            override fun onLost(network: Network) {
+                super.onLost(network)
+                isConnectedToNetwork = false
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,14 +77,18 @@ class MainFragment : DaggerFragment() {
         }
 
         postLollipop {
-            context?.registerNetworkCallback(onAvailableAction = {
-                isConnectedToNetwork = true
-            }, onLostAction = {
-                isConnectedToNetwork = false
-            })
+            context?.registerNetworkCallback(networkCallback)
         }
         initVm()
         initViews()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onDestroy() {
+        super.onDestroy()
+        postLollipop {
+            context?.unregisterNetworkCallback(networkCallback)
+        }
     }
 
     private fun initVm() {

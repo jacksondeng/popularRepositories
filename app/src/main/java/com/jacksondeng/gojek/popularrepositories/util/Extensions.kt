@@ -2,7 +2,6 @@ package com.jacksondeng.gojek.popularrepositories.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkRequest
 import android.os.Build
 import android.widget.TextView
@@ -14,6 +13,9 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
+import kotlin.contracts.ContractBuilder
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 
 fun TextView.leftDrawable(@DrawableRes id: Int = 0, @DimenRes sizeRes: Int) {
@@ -36,23 +38,20 @@ fun postLollipop(block: () -> Unit) {
 }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun Context.registerNetworkCallback(onAvailableAction: () -> Unit, onLostAction: () -> Unit) {
+fun Context.registerNetworkCallback(netWorkCallback: ConnectivityManager.NetworkCallback) {
     val connectivityManger =
         this.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     connectivityManger.registerNetworkCallback(
         NetworkRequest.Builder().build(),
-        object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                onAvailableAction.invoke()
-            }
-
-            override fun onLost(network: Network) {
-                super.onLost(network)
-                onLostAction.invoke()
-            }
-        }
+        netWorkCallback
     )
+}
+
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+fun Context.unregisterNetworkCallback(netWorkCallback: ConnectivityManager.NetworkCallback) {
+    val connectivityManger =
+        this.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    connectivityManger.unregisterNetworkCallback(netWorkCallback)
 }
 
 
