@@ -1,2 +1,2 @@
-include ':app', ':githubrx', ':githubcoroutine'
+include ':app', ':githubrx', ':githubcoroutine', ':common'
 rootProject.name='popularRepositories'
