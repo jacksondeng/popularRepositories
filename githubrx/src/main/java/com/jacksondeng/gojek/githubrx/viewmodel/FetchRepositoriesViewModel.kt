@@ -39,7 +39,7 @@ class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepo
                             _state.value = State.Loaded(it)
                         } else {
                             // TODO: localize strings
-                            _state.value = State.Error("Failed to load more repositories")
+                            _state.value = State.Error("Unknown error occurred")
                         }
                     } ?: run {
                         _state.value = State.Error("Unknown error occurred")
