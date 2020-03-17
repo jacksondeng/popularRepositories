@@ -5,7 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import cache.dao.RepoDao
 import cache.db.RepoDb
-import com.jacksondeng.gojek.githubrx.model.entity.Repo
+import com.jacksondeng.gojek.common.model.entity.Repo
 import util.TrampolineSchedulerProvider
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins

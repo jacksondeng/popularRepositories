@@ -4,11 +4,11 @@ import android.accounts.NetworkErrorException
 import android.content.SharedPreferences
 import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
 import cache.dao.RepoDao
+import com.jacksondeng.gojek.common.model.dto.BuilderDTO
+import com.jacksondeng.gojek.common.model.dto.RepoDTO
+import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.repo.FetchRepositoriesRepoImpl
 import com.jacksondeng.gojek.githubrx.data.repo.TAG_LAST_CACHED_TIME
-import com.jacksondeng.gojek.githubrx.model.dto.BuilderDTO
-import com.jacksondeng.gojek.githubrx.model.dto.RepoDTO
-import com.jacksondeng.gojek.githubrx.model.entity.Repo
 import util.TrampolineSchedulerProvider
 import io.mockk.every
 import io.mockk.mockk

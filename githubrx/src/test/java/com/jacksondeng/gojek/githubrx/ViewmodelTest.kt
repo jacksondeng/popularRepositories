@@ -2,8 +2,8 @@ package com.jacksondeng.gojek.githubrx
 
 import android.accounts.NetworkErrorException
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.repo.FetchRepositoriesRepo
-import com.jacksondeng.gojek.githubrx.model.entity.Repo
 import util.State
 import util.TrampolineSchedulerProvider
 import com.jacksondeng.gojek.githubrx.viewmodel.FetchRepositoriesViewModel
