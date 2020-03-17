@@ -4,7 +4,7 @@ import com.jacksondeng.gojek.githubrx.data.api.BASE_URL
 import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
 import com.jacksondeng.gojek.githubrx.data.api.TIMEOUT
 import com.jacksondeng.gojek.popularrepositories.di.scope.FragmentScope
-import util.Tls12SocketFactory.Companion.enableTls12
+import com.jacksondeng.gojek.common.util.Tls12SocketFactory.Companion.enableTls12
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

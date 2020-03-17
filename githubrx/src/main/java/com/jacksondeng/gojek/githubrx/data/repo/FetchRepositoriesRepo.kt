@@ -6,7 +6,7 @@ import com.jacksondeng.gojek.common.model.dto.RepoDTO
 import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
 import cache.dao.RepoDao
-import util.BaseSchedulerProvider
+import com.jacksondeng.gojek.common.util.BaseSchedulerProvider
 import io.reactivex.Flowable
 import org.joda.time.Interval
 import javax.inject.Inject

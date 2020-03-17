@@ -1,4 +1,4 @@
-package util
+package com.jacksondeng.gojek.common.util
 
 sealed class EventType {
     data class Expand(val position: Int): EventType()

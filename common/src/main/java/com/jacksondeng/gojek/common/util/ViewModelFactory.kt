@@ -1,4 +1,4 @@
-package util
+package com.jacksondeng.gojek.common.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

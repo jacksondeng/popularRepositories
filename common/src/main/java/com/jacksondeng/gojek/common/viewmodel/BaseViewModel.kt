@@ -1,4 +1,4 @@
-package viewmodel
+package com.jacksondeng.gojek.common.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.common.model.entity.Repo
 import io.reactivex.disposables.CompositeDisposable
-import util.State
+import com.jacksondeng.gojek.common.util.State
 
 class BaseViewModel : ViewModel() {
     private val _state = MutableLiveData<State>()

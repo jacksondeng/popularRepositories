@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.repo.FetchRepositoriesRepo
 import io.reactivex.disposables.CompositeDisposable
-import util.*
+import com.jacksondeng.gojek.common.util.*
 import javax.inject.Inject
 
 class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepositoriesRepo) :

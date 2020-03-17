@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jacksondeng.gojek.common.model.entity.RepoItem
 import com.jacksondeng.gojek.popularrepositories.R
 import com.jacksondeng.gojek.popularrepositories.databinding.ListRepositoryItemBinding
-import util.InteractionListener
+import com.jacksondeng.gojek.common.util.InteractionListener
 import com.jacksondeng.gojek.popularrepositories.util.leftDrawable
 
 class RepoItemViewholder(

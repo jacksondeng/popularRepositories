@@ -6,9 +6,9 @@ import com.jacksondeng.gojek.githubcoroutine.data.repo.FetchRepositoriesRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import util.EventType
-import util.InteractionListener
-import util.State
+import com.jacksondeng.gojek.common.util.EventType
+import com.jacksondeng.gojek.common.util.InteractionListener
+import com.jacksondeng.gojek.common.util.State
 import javax.inject.Inject
 
 class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepositoriesRepo) :

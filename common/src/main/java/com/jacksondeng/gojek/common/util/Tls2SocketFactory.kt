@@ -1,4 +1,4 @@
-package util
+package com.jacksondeng.gojek.common.util
 
 import android.os.Build
 import okhttp3.OkHttpClient

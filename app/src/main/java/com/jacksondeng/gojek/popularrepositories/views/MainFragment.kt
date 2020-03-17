@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.jacksondeng.gojek.common.model.entity.RepoItem
-import util.EventType
-import util.State
-import util.ViewModelFactory
+import com.jacksondeng.gojek.common.util.EventType
+import com.jacksondeng.gojek.common.util.State
+import com.jacksondeng.gojek.common.util.ViewModelFactory
 import com.jacksondeng.gojek.popularrepositories.R
 import com.jacksondeng.gojek.popularrepositories.databinding.MainFragmentBinding
 import com.jacksondeng.gojek.popularrepositories.util.*
