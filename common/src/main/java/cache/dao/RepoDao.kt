@@ -18,5 +18,5 @@ interface RepoDao {
 
     // TODO : Separate DAO for githubcoroutines module and githubrx module
     @Query("SELECT * FROM $TABLE_NAME_REPOS")
-    fun getCachedReposSuspend(): List<Repo>
+    suspend fun getCachedReposSuspend(): List<Repo>
 }

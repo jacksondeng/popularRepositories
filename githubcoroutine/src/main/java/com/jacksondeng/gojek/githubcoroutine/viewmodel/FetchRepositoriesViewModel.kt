@@ -4,7 +4,9 @@ import androidx.lifecycle.*
 import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubcoroutine.data.repo.FetchRepositoriesRepo
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import util.EventType
 import util.InteractionListener
 import util.State
@@ -32,7 +34,10 @@ class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepo
     fun fetchRepositories() {
         viewModelScope.launch {
             _state.value = State.Loading()
-            val data = repo.fetchRepositories()
+            var data = emptyList<Repo>()
+            withContext(Dispatchers.IO) {
+                data = repo.fetchRepositories()
+            }
             if (data.isNotEmpty()) {
                 repositories.addAll(data)
                 _state.value = State.Loaded(data)
