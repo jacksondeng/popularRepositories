@@ -41,7 +41,8 @@ buildscript {
                 dagger            : "2.17",
                 room              : "2.2.4",
                 joda              : "2.10.5",
-                googlePlay        : "12.0.1"
+                googlePlay        : "12.0.1",
+                coroutines        : "1.3.4"
         ]
     }
 
