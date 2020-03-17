@@ -35,7 +35,6 @@ dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${configuration.kotlinVersion}"
         implementation "androidx.appcompat:appcompat:${libraries.appcompat}"
-        implementation "com.google.android.material:material:${libraries.material}"
 
         implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraries.lifecycleExt}"
         implementation "androidx.lifecycle:lifecycle-livedata-ktx:${libraries.lifecycleExt}"
@@ -49,9 +48,6 @@ dependencies {
         androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
         androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
 
-        // ConstraintLayout
-        implementation "androidx.constraintlayout:constraintlayout:${libraries.constraintLayout}"
-
         // Retrofit
         implementation "com.squareup.retrofit2:retrofit:${libraries.retrofit}"
         implementation "com.squareup.retrofit2:converter-moshi:${libraries.moshi}"
@@ -64,13 +60,6 @@ dependencies {
         // OkHttp
         implementation "com.squareup.okhttp3:okhttp:${libraries.okHttp}"
         implementation "com.squareup.okhttp3:logging-interceptor:${libraries.okHttpLog}"
-
-        // Glide
-        implementation "com.github.bumptech.glide:glide:${libraries.glide}"
-        annotationProcessor "com.github.bumptech.glide:compiler:${libraries.glide}"
-
-        // SwipeRefreshLayout
-        implementation "androidx.swiperefreshlayout:swiperefreshlayout:${libraries.swipeRefreshLayout}"
 
         // Dagger
         implementation "com.google.dagger:dagger:${libraries.dagger}"
@@ -87,11 +76,5 @@ dependencies {
 
         // Joda
         implementation "joda-time:joda-time:${libraries.joda}"
-
-        // Multidex
-        implementation "androidx.multidex:multidex:${configuration.multidex}"
-
-        // Google Play Services
-        implementation "com.google.android.gms:play-services:${libraries.googlePlay}"
     }
 }
