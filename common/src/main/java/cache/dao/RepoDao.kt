@@ -15,4 +15,8 @@ interface RepoDao {
 
     @Query("DELETE FROM $TABLE_NAME_REPOS")
     fun clearCache()
+
+    // TODO : Separate DAO for githubcoroutines module and githubrx module
+    @Query("SELECT * FROM $TABLE_NAME_REPOS")
+    fun getCachedReposSuspend(): List<Repo>
 }
