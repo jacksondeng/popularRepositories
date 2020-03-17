@@ -3,10 +3,10 @@ package com.jacksondeng.gojek.popularrepositories.views.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.jacksondeng.gojek.common.model.entity.RepoItem
 import com.jacksondeng.gojek.githubrx.util.InteractionListener
 import com.jacksondeng.gojek.popularrepositories.R
 import com.jacksondeng.gojek.popularrepositories.databinding.ListRepositoryItemBinding
-import com.jacksondeng.gojek.githubrx.model.entity.RepoItem
 import com.jacksondeng.gojek.popularrepositories.util.RepoItemiffCallback
 import com.jacksondeng.gojek.popularrepositories.views.viewholder.RepoItemViewholder
 

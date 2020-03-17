@@ -1,8 +1,8 @@
 package com.jacksondeng.gojek.githubrx.data.cache.dao
 
 import androidx.room.*
+import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.cache.db.TABLE_NAME_REPOS
-import com.jacksondeng.gojek.githubrx.model.entity.Repo
 import io.reactivex.Single
 
 @Dao

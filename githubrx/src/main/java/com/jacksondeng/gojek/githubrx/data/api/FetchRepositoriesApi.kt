@@ -1,6 +1,6 @@
 package com.jacksondeng.gojek.githubrx.data.api
 
-import com.jacksondeng.gojek.githubrx.model.dto.RepoDTO
+import com.jacksondeng.gojek.common.model.dto.RepoDTO
 import io.reactivex.Flowable
 import retrofit2.http.GET
 

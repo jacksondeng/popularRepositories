@@ -1,6 +1,11 @@
 apply plugin: 'com.android.library'
+
 apply plugin: 'kotlin-android'
+
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
 
@@ -26,10 +31,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${configuration.kotlinVersion}"
+    implementation "androidx.appcompat:appcompat:${libraries.appcompat}"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraries.lifecycleExt}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${libraries.lifecycleExt}"
+
+    // Tests
+    testImplementation "junit:junit:${tests.junit}"
+    testImplementation "android.arch.core:core-testing:${tests.archCore}"
+    testImplementation "io.mockk:mockk:${tests.mockk}"
+
+    androidTestImplementation "androidx.test:runner:${tests.testRunner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
+    androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
+
+    // Moshi
+    implementation "com.squareup.retrofit2:converter-moshi:${libraries.moshi}"
+
+    // Room
+    implementation "androidx.room:room-runtime:${libraries.room}"
+    kapt "androidx.room:room-compiler:${libraries.room}"
+    implementation "androidx.room:room-rxjava2:${libraries.room}"
 }

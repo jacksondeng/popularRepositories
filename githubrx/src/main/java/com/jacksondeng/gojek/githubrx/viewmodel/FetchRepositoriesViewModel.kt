@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.repo.FetchRepositoriesRepo
 import com.jacksondeng.gojek.githubrx.util.*
-import com.jacksondeng.gojek.githubrx.model.entity.Repo
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 

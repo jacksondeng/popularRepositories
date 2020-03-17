@@ -1,6 +1,6 @@
 package com.jacksondeng.gojek.githubrx.util
 
-import com.jacksondeng.gojek.githubrx.model.entity.Repo
+import com.jacksondeng.gojek.common.model.entity.Repo
 
 sealed class State {
     data class Loaded(val repositories: List<Repo>) : State()

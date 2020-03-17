@@ -1,7 +1,7 @@
 package com.jacksondeng.gojek.popularrepositories.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.jacksondeng.gojek.githubrx.model.entity.RepoItem
+import com.jacksondeng.gojek.common.model.entity.RepoItem
 
 class RepoItemiffCallback : DiffUtil.ItemCallback<RepoItem>() {
     override fun areItemsTheSame(oldItem: RepoItem, newItem: RepoItem): Boolean {

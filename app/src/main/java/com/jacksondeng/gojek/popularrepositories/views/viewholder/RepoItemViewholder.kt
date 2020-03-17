@@ -1,9 +1,9 @@
 package com.jacksondeng.gojek.popularrepositories.views.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.jacksondeng.gojek.common.model.entity.RepoItem
 import com.jacksondeng.gojek.popularrepositories.R
 import com.jacksondeng.gojek.popularrepositories.databinding.ListRepositoryItemBinding
-import com.jacksondeng.gojek.githubrx.model.entity.RepoItem
 import com.jacksondeng.gojek.githubrx.util.InteractionListener
 import com.jacksondeng.gojek.popularrepositories.util.leftDrawable
 

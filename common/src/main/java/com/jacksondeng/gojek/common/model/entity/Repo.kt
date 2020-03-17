@@ -1,9 +1,9 @@
-package com.jacksondeng.gojek.githubrx.model.entity
+package com.jacksondeng.gojek.common.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.jacksondeng.gojek.githubrx.data.cache.db.TABLE_NAME_REPOS
 
+const val TABLE_NAME_REPOS = "ReposTable"
 @Entity(tableName = TABLE_NAME_REPOS)
 data class Repo(
     @PrimaryKey(autoGenerate = true)

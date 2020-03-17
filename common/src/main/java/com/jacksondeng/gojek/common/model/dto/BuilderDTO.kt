@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.githubrx.model.dto
+package com.jacksondeng.gojek.common.model.dto
 
 import com.squareup.moshi.Json
 
