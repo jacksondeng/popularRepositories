@@ -3,7 +3,6 @@ package com.jacksondeng.gojek.githubcoroutine.viewmodel
 import androidx.lifecycle.*
 import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubcoroutine.data.repo.FetchRepositoriesRepo
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,8 +17,6 @@ class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepo
 
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
-
-    private var compositeDisposable = CompositeDisposable()
 
     private var repositories = mutableListOf<Repo>()
 
@@ -48,11 +45,6 @@ class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepo
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
-    }
-
     override fun onItemClicked(expanded: Boolean, position: Int) {
         if (expanded) {
             _state.value = State.Event(EventType.Collapse(position))
@@ -62,7 +54,6 @@ class FetchRepositoriesViewModel @Inject constructor(private val repo: FetchRepo
     }
 
     fun onRefresh() {
-        compositeDisposable.clear()
         repositories.clear()
         fetchRepositories()
     }
