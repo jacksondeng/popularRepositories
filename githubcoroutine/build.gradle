@@ -30,6 +30,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${configuration.kotlinVersion}"
     implementation "androidx.appcompat:appcompat:${libraries.appcompat}"
 
@@ -48,7 +49,7 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${libraries.retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${libraries.moshi}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${libraries.rxjavaAdapter}"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${libraries.coroutinesAdapter}"
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:${libraries.okHttp}"
