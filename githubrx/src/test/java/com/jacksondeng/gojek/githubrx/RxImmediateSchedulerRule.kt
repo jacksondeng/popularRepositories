@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.popularrepositories
+package com.jacksondeng.gojek.githubrx
 
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins

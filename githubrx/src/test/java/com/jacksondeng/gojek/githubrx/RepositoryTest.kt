@@ -1,15 +1,15 @@
-package com.jacksondeng.gojek.popularrepositories
+package com.jacksondeng.gojek.githubrx
 
 import android.accounts.NetworkErrorException
 import android.content.SharedPreferences
-import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
-import com.jacksondeng.gojek.popularrepositories.data.cache.dao.RepoDao
-import com.jacksondeng.gojek.popularrepositories.data.repo.FetchRepositoriesRepoImpl
-import com.jacksondeng.gojek.popularrepositories.di.module.TAG_LAST_CACHED_TIME
-import com.jacksondeng.gojek.popularrepositories.model.dto.BuilderDTO
-import com.jacksondeng.gojek.popularrepositories.model.dto.RepoDTO
-import com.jacksondeng.gojek.popularrepositories.model.entity.Repo
-import com.jacksondeng.gojek.popularrepositories.util.TrampolineSchedulerProvider
+import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
+import com.jacksondeng.gojek.githubrx.data.cache.dao.RepoDao
+import com.jacksondeng.gojek.githubrx.data.repo.FetchRepositoriesRepoImpl
+import com.jacksondeng.gojek.githubrx.data.repo.TAG_LAST_CACHED_TIME
+import com.jacksondeng.gojek.githubrx.model.dto.BuilderDTO
+import com.jacksondeng.gojek.githubrx.model.dto.RepoDTO
+import com.jacksondeng.gojek.githubrx.model.entity.Repo
+import com.jacksondeng.gojek.githubrx.util.TrampolineSchedulerProvider
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Flowable

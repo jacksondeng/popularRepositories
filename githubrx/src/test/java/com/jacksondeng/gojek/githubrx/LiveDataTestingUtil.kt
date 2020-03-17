@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.popularrepositories
+package com.jacksondeng.gojek.githubrx
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
