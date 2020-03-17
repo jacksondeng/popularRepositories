@@ -5,7 +5,7 @@ import androidx.annotation.VisibleForTesting
 import com.jacksondeng.gojek.common.model.dto.RepoDTO
 import com.jacksondeng.gojek.common.model.entity.Repo
 import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
-import com.jacksondeng.gojek.githubrx.data.cache.dao.RepoDao
+import cache.dao.RepoDao
 import com.jacksondeng.gojek.githubrx.util.BaseSchedulerProvider
 import io.reactivex.Flowable
 import org.joda.time.Interval

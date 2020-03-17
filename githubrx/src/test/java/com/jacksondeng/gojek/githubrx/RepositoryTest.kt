@@ -3,7 +3,7 @@ package com.jacksondeng.gojek.githubrx
 import android.accounts.NetworkErrorException
 import android.content.SharedPreferences
 import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
-import com.jacksondeng.gojek.githubrx.data.cache.dao.RepoDao
+import cache.dao.RepoDao
 import com.jacksondeng.gojek.githubrx.data.repo.FetchRepositoriesRepoImpl
 import com.jacksondeng.gojek.githubrx.data.repo.TAG_LAST_CACHED_TIME
 import com.jacksondeng.gojek.githubrx.model.dto.BuilderDTO
