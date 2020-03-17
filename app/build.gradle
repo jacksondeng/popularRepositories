@@ -45,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation project(':githubrx')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${configuration.kotlinVersion}"
     implementation "androidx.appcompat:appcompat:${libraries.appcompat}"

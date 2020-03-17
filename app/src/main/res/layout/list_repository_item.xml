@@ -8,7 +8,7 @@
 
         <variable
             name="obj"
-            type="com.jacksondeng.gojek.popularrepositories.model.entity.RepoItem" />
+            type="com.jacksondeng.gojek.githubrx.model.entity.RepoItem" />
 
         <import type="android.view.View"/>
 

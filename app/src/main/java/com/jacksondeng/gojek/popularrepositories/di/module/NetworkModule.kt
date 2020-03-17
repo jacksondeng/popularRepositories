@@ -1,8 +1,8 @@
 package com.jacksondeng.gojek.popularrepositories.di.module
 
-import com.jacksondeng.gojek.popularrepositories.data.api.BASE_URL
-import com.jacksondeng.gojek.popularrepositories.data.api.FetchRepositoriesApi
-import com.jacksondeng.gojek.popularrepositories.data.api.TIMEOUT
+import com.jacksondeng.gojek.githubrx.data.api.BASE_URL
+import com.jacksondeng.gojek.githubrx.data.api.FetchRepositoriesApi
+import com.jacksondeng.gojek.githubrx.data.api.TIMEOUT
 import com.jacksondeng.gojek.popularrepositories.di.scope.FragmentScope
 import com.jacksondeng.gojek.popularrepositories.util.Tls12SocketFactory.Companion.enableTls12
 import dagger.Module

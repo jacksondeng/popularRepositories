@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.jacksondeng.gojek.popularrepositories.viewmodel.FetchRepositoriesViewModel" />
+            type="com.jacksondeng.gojek.githubrx.viewmodel.FetchRepositoriesViewModel" />
 
         <import type="android.view.View"/>
 
