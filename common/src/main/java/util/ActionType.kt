@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.githubrx.util
+package util
 
 sealed class EventType {
     data class Expand(val position: Int): EventType()

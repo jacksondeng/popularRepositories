@@ -1,4 +1,4 @@
-package com.jacksondeng.gojek.githubrx.util
+package util
 
 import com.jacksondeng.gojek.common.model.entity.Repo
 

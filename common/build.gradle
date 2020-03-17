@@ -53,4 +53,16 @@ dependencies {
     implementation "androidx.room:room-runtime:${libraries.room}"
     kapt "androidx.room:room-compiler:${libraries.room}"
     implementation "androidx.room:room-rxjava2:${libraries.room}"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:${libraries.rxjava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${libraries.rxandroid}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${libraries.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${libraries.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${libraries.dagger}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${libraries.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${libraries.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${libraries.dagger}"
 }

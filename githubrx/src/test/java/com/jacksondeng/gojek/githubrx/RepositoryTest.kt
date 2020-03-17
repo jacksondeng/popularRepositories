@@ -9,7 +9,7 @@ import com.jacksondeng.gojek.githubrx.data.repo.TAG_LAST_CACHED_TIME
 import com.jacksondeng.gojek.githubrx.model.dto.BuilderDTO
 import com.jacksondeng.gojek.githubrx.model.dto.RepoDTO
 import com.jacksondeng.gojek.githubrx.model.entity.Repo
-import com.jacksondeng.gojek.githubrx.util.TrampolineSchedulerProvider
+import util.TrampolineSchedulerProvider
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Flowable
