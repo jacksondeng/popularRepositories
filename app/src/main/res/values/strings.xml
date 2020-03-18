@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">popularRepositories</string>
+    <string name="app_name">Trending Repositories</string>
     <string name="string_try_again">Retry</string>
     <string name="empty_layout_title">Something went wrong..</string>
     <string name="empty_layout_subtitle">An alien is probably blocking your signal.</string>
