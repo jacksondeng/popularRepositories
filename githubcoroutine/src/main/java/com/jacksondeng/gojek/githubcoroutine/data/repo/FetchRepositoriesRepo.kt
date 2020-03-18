@@ -12,7 +12,7 @@ import javax.inject.Inject
 const val TAG_LAST_CACHED_TIME = "lastCachedTime"
 
 interface FetchRepositoriesRepo {
-    suspend fun fetchRepositories(): List<Repo>
+    suspend fun fetchRepositories(dispatcherProvider: DispatcherProvider): List<Repo>
 }
 
 class FetchRepositoriesRepoImpl @Inject constructor(
@@ -21,7 +21,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
     private val sharePref: SharedPreferences
 ) : FetchRepositoriesRepo {
 
-    override suspend fun fetchRepositories(): List<Repo> {
+    override suspend fun fetchRepositories(dispatcherProvider: DispatcherProvider): List<Repo> {
         return try {
             api.fetchRepositories().map {
                 mapToModel(it)
@@ -30,6 +30,7 @@ class FetchRepositoriesRepoImpl @Inject constructor(
                 this
             }
         } catch (e: Exception) {
+            println("EEEE $e")
             if (sharePref.getLong(TAG_LAST_CACHED_TIME, -1L) != -1L)
                 reposDao.getCachedReposSuspend()
             else
