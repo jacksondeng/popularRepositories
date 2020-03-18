@@ -41,15 +41,16 @@ dependencies {
     testImplementation "junit:junit:${tests.junit}"
     testImplementation "android.arch.core:core-testing:${tests.archCore}"
     testImplementation "io.mockk:mockk:${tests.mockk}"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${libraries.coroutines}"
 
     androidTestImplementation "androidx.test:runner:${tests.testRunner}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${tests.espresso}"
     androidTestImplementation "androidx.test.ext:junit:${tests.androidJunit}"
 
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${libraries.retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${libraries.moshi}"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${libraries.coroutinesAdapter}"
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:${libraries.okHttp}"
